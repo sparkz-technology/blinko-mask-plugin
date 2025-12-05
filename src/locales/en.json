@@ -1,5 +1,8 @@
 {
-  "title": "My Plugin",
-  "countLabel": "Count is {{count}}",
-  "successMessage": "Success!"
+  "title": "Mask Plugin",
+  "insertMask": "Insert Mask",
+  "maskTooltip": "Hide sensitive content",
+  "showContent": "Show content",
+  "hideContent": "Hide content",
+  "maskPlaceholder": "hidden text"
 } 

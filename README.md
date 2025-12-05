@@ -1,72 +1,89 @@
-# Blinko Plugin Template
+# Blinko Mask Plugin
 
-A template for building Blinko plugins quickly and efficiently.
+A Blinko plugin that allows you to hide sensitive content with a spoiler-like mask. Content wrapped in `||||` markers will be blurred and can be revealed by clicking an eye icon.
 
-[Blinko Plugin Development Documentation](https://blinko.mintlify.app/plugins/get-started)
+## ✨ Features
 
-## 🚀 Quick Start
+- **Hide sensitive content**: Wrap any text with `||||` markers to hide it
+- **Eye icon toggle**: Click the eye icon to reveal or hide the content
+- **Toolbar button**: Easily insert mask syntax using the toolbar icon
+- **Smooth animations**: Content blur/reveal with smooth transitions
+- **Multilingual support**: Available in English and Chinese
 
-1. Clone this repository
-```bash
-git clone https://github.com/blinko-space/blinko-plugin-template.git
-cd blinko-plugin-template
+## 📖 Usage
+
+### Syntax
+
+To hide content, wrap it with four pipe characters on each side:
+
+```
+||||your secret content here||||
 ```
 
-2. Install dependencies
+### Examples
+
+```markdown
+My password is ||||secretpassword123||||
+
+API Key: ||||sk-xxxxxxxxxxxxxxxxxxxx||||
+
+Personal note: ||||This is a private message||||
+```
+
+When rendered, the content between the `||||` markers will appear blurred with an eye icon. Click the eye icon to toggle visibility.
+
+### Toolbar
+
+The plugin adds a mask icon (👁️‍🗨️) to the editor toolbar. Click it to insert the mask syntax at the cursor position.
+
+## 🚀 Installation
+
+1. Install the plugin from the Blinko plugin marketplace
+2. Enable the plugin in your Blinko settings
+3. Start using `||||` syntax in your notes!
+
+## 🛠️ Development
+
+### Prerequisites
+
+- Node.js or Bun
+- npm or bun package manager
+
+### Setup
+
 ```bash
+# Clone the repository
+git clone https://github.com/sparkz-technology/blinko-mask-plugin.git
+cd blinko-mask-plugin
+
+# Install dependencies
+npm install
+# or
 bun install
-```
 
-3. Start development server
-```bash
+# Start development server
+npm run dev
+# or
 bun run dev
 ```
 
-4. Visit `http://localhost:3000` for connection instructions
+### Build
 
-## 📖 Official Documentation
-
-> ⭐ **Important: Please visit [Blinko Plugin Development Documentation](https://blinko.mintlify.app/plugins/get-started) for complete development guides and best practices!**
-
-## 🛠️ Development Commands
-
-- `bun run dev` - Start development server
-- `bun run release:publish` - Build and publish plugin
+```bash
+npm run release:publish
+# or
+bun run release:publish
+```
 
 ## 📁 Directory Structure
 
 ```
 ├── src/              # Source code directory
-├── dist/            # Development build output
-├── release/         # Production build output
-├── plugin.json      # Plugin configuration
-└── vite.config.ts   # Vite configuration
-```
-
-## 🔧 Configuration
-
-Configure your plugin in `plugin.json`:
-
-```json
-{
-  "name": "blinko-plugin-demo",
-  "author": "blinko-offical",
-  "url": "https://github.com/blinko-space/blinko-plugin-template",
-  "version": "0.0.4",
-  "minAppVersion": "0.0.0",
-  "displayName": {
-    "default": "Blinko plugin demo",
-    "zh": "Blinko插件示例"
-  },
-  "description": {
-    "default": "This is a blinko plugin demo, you can use it as a template to create your own plugin.",
-    "zh": "这是一个blinko插件示例，你可以使用它作为模板来创建自己的插件。"
-  },
-  "readme": {
-    "default": "README.md",
-    "zh": "README_zh.md"
-  }
-}
+│   ├── index.tsx     # Main plugin entry point
+│   └── locales/      # Translation files
+├── release/          # Production build output
+├── plugin.json       # Plugin configuration
+└── vite.config.ts    # Vite configuration
 ```
 
 ## 📝 License

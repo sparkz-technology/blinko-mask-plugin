@@ -1,5 +1,8 @@
 {
-  "title": "我的插件",
-  "countLabel": "计数为 {{count}}",
-  "successMessage": "成功！"
+  "title": "遮罩插件",
+  "insertMask": "插入遮罩",
+  "maskTooltip": "隐藏敏感内容",
+  "showContent": "显示内容",
+  "hideContent": "隐藏内容",
+  "maskPlaceholder": "隐藏的文字"
 } 
