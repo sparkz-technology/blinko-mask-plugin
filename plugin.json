@@ -1,16 +1,16 @@
 {
-  "name": "blinko-plugin-demo",
-  "author": "blinko-offical",
-  "url": "https://github.com/blinko-space/blinko-plugin-template",
-  "version": "0.0.4",
+  "name": "blinko-mask-plugin",
+  "author": "sparkz-technology",
+  "url": "https://github.com/sparkz-technology/blinko-mask-plugin",
+  "version": "1.0.0",
   "minAppVersion": "0.0.0",
   "displayName": {
-    "default": "Blinko plugin demo",
-    "zh": "Blinko插件示例"
+    "default": "Mask Plugin",
+    "zh": "遮罩插件"
   },
   "description": {
-    "default": "This is a blinko plugin demo, you can use it as a template to create your own plugin.",
-    "zh": "这是一个blinko插件示例，你可以使用它作为模板来创建自己的插件。"
+    "default": "Hide sensitive content with ||||password|||| syntax. Click the eye icon to reveal hidden text.",
+    "zh": "使用 ||||password|||| 语法隐藏敏感内容。点击眼睛图标显示隐藏的文字。"
   },
   "readme": {
     "default": "README.md",
