@@ -111,35 +111,52 @@ function createMaskElement(content: string): HTMLElement {
 }
 
 /**
- * Pattern to match ||||content|||| syntax
+ * Pattern string for matching ||||content|||| syntax
  */
-const MASK_PATTERN = /\|\|\|\|(.+?)\|\|\|\|/g;
+const MASK_PATTERN_STRING = '\\|\\|\\|\\|(.+?)\\|\\|\\|\\|';
+
+/**
+ * Creates a new regex pattern for matching mask syntax
+ */
+function createMaskPattern(global = false): RegExp {
+  return new RegExp(MASK_PATTERN_STRING, global ? 'g' : '');
+}
+
+/**
+ * Tests if text contains mask pattern
+ */
+function hasMaskPattern(text: string): boolean {
+  return createMaskPattern().test(text);
+}
 
 /**
  * Process a text node to replace mask patterns
  */
 function processTextNode(node: Text): void {
   const text = node.textContent || '';
-  if (!MASK_PATTERN.test(text)) return;
+  if (!hasMaskPattern(text)) return;
   
-  // Reset pattern lastIndex
-  MASK_PATTERN.lastIndex = 0;
+  const pattern = createMaskPattern(true);
+  const matches = Array.from(text.matchAll(pattern));
+  
+  if (matches.length === 0) return;
   
   const fragment = document.createDocumentFragment();
   let lastIndex = 0;
-  let match;
   
-  while ((match = MASK_PATTERN.exec(text)) !== null) {
+  for (const match of matches) {
+    const matchIndex = match.index ?? 0;
+    
     // Add text before the match
-    if (match.index > lastIndex) {
-      fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+    if (matchIndex > lastIndex) {
+      fragment.appendChild(document.createTextNode(text.slice(lastIndex, matchIndex)));
     }
     
     // Add the masked element
     const maskedContent = match[1];
     fragment.appendChild(createMaskElement(maskedContent));
     
-    lastIndex = match.index + match[0].length;
+    lastIndex = matchIndex + match[0].length;
   }
   
   // Add remaining text after last match
@@ -187,7 +204,7 @@ function walkAndProcess(element: Element): void {
       }
       parent = parent.parentElement;
     }
-    if (!skip && node.textContent && MASK_PATTERN.test(node.textContent)) {
+    if (!skip && node.textContent && hasMaskPattern(node.textContent)) {
       textNodes.push(node as Text);
     }
   }
@@ -257,7 +274,7 @@ System.register([], (exports) => ({
                 walkAndProcess(node as Element);
               } else if (node.nodeType === Node.TEXT_NODE && node.parentElement) {
                 const text = node.textContent || '';
-                if (MASK_PATTERN.test(text)) {
+                if (hasMaskPattern(text)) {
                   processTextNode(node as Text);
                 }
               }
@@ -343,8 +360,9 @@ System.register([], (exports) => ({
         document.querySelectorAll('[data-mask-plugin="true"]').forEach((el) => {
           const content = el.querySelector('.blinko-mask-content');
           if (content && el.parentNode) {
+            const textContent = content.textContent || '';
             el.parentNode.replaceChild(
-              document.createTextNode(`||||${content.textContent}||||`),
+              document.createTextNode(`||||${textContent}||||`),
               el
             );
           }
